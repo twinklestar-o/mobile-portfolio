@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactScreen extends StatelessWidget {
-  void _launchURL(String url) async {
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+  // Fungsi untuk membuka URL dengan context
+  void _launchURL(BuildContext context, String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.inAppWebView);
     } else {
-      throw 'Tidak bisa membuka URL $url';
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Could not launch $url')));
     }
   }
 
@@ -23,12 +27,13 @@ class ContactScreen extends StatelessWidget {
         ListTile(
           leading: Icon(Icons.link),
           title: Text('LinkedIn'),
-          onTap: () => _launchURL('https://linkedin.com/in/ruthsiregar'),
+          onTap:
+              () => _launchURL(context, 'https://linkedin.com/in/ruthsiregar'),
         ),
         ListTile(
           leading: Icon(Icons.code),
           title: Text('GitHub'),
-          onTap: () => _launchURL('https://github.com/ruthsiregar'),
+          onTap: () => _launchURL(context, 'https://github.com/ruthsiregar'),
         ),
       ],
     );

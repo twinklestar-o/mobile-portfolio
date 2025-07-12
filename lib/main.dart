@@ -52,7 +52,11 @@ class _PortfolioMainPageState extends State<PortfolioMainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text(
+          'Portfolio',
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Color.fromARGB(100, 87, 140, 190),
         actions: [
           IconButton(
             icon: Icon(widget.isDarkMode ? Icons.light_mode : Icons.dark_mode),
